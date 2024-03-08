@@ -1,0 +1,4 @@
+<%= form_with url: "/forecasts", data: { turbo: false } do |form| %>
+  <%= form.text_field :address, required: true %>
+  <%= form.submit "Fetch" %>
+<% end %>
