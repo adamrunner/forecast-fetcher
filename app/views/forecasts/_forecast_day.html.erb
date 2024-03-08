@@ -1,4 +1,6 @@
-<h5><%= forecast_day["datetime"] %></h5>
-<p>High: <%= forecast_day["tempmax"] %>°F</p>
-<p>Low: <%= forecast_day["tempmin"] %>°F</p>
-<p>Conditions: <%= forecast_day["conditions"] %></p>
+<div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <h5 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white"><%= forecast_day["datetime"] %></h5>
+  <p class="mb-2 text-gray-900 dark:text-white">High: <%= forecast_day["tempmax"] %>°F</p>
+  <p class="mb-2 text-gray-900 dark:text-white">Low: <%= forecast_day["tempmin"] %>°F</p>
+  <p class="mb-2 text-gray-900 dark:text-white">Conditions: <%= forecast_day["conditions"] %></p>
+</div>

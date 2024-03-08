@@ -1,6 +1,9 @@
-<h4>Current Conditions</h4>
-
-<p>Temperature: <%= @current_conditions["temp"] %>°F</p>
-<p>Feels Like: <%= @current_conditions["feelslike"] %>°F</p>
-<p>Humidity: <%= @current_conditions["humidity"] %>%</p>
-<p>Dew Point: <%= @current_conditions["dew"] %>°F</p>
+<div class="grid grid-cols-1 justify-items-center">
+  <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <h4 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Current Conditions</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Temperature: <%= @current_conditions["temp"] %>°F</p>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Feels Like: <%= @current_conditions["feelslike"] %>°F</p>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Humidity: <%= @current_conditions["humidity"] %>%</p>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Dew Point: <%= @current_conditions["dew"] %>°F</p>
+  </div>
+</div>
