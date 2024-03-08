@@ -7,6 +7,7 @@ VISUAL_CROSSING_API_URL = 'https://weather.visualcrossing.com/VisualCrossingWebS
 
 class VisualCrossingWeatherClient
   def initialize(api_key:)
+    raise ArgumentError, 'api_key cannot be blank' if api_key.nil?
     @uri       = URI(VISUAL_CROSSING_API_URL)
     @api_key   = api_key
     @uri.query = URI.encode_www_form({ key: @api_key, include: 'current,days'})

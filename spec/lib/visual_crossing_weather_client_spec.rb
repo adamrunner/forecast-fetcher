@@ -1,11 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe VisualCrossingWeatherClient do
-  subject { described_class.new(api_key: 'fake_key') }
+  let(:api_key) { 'fake_key' }
+  subject { described_class.new(api_key: api_key) }
 
   describe '#initialize' do
+    let(:query_params) { URI.encode_www_form({ key: api_key, include: 'current,days'}) }
+
     it 'requires an api_key to be passed in' do
       expect { described_class.new }.to raise_error(ArgumentError)
+    end
+
+    it 'throws an error if a nil api_key is passed in' do
+      expect { described_class.new(api_key: nil) }.to raise_error(ArgumentError)
+    end
+
+    it 'sets the URI to the VisualCrossing API URL' do
+      expect(subject.instance_variable_get(:@uri).to_s).to include('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/')
+    end
+
+    it 'sets the API key and default options in the URI' do
+      expect(subject.instance_variable_get(:@uri).query).to eq(query_params)
     end
   end
 
