@@ -16,7 +16,7 @@ RSpec.describe VisualCrossingWeatherClient do
     end
 
     it 'sets the URI to the VisualCrossing API URL' do
-      expect(subject.instance_variable_get(:@uri).to_s).to include('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/')
+      expect(subject.instance_variable_get(:@uri).to_s).to include(VISUAL_CROSSING_API_URL)
     end
 
     it 'sets the API key and default options in the URI' do
@@ -31,9 +31,9 @@ RSpec.describe VisualCrossingWeatherClient do
   end
 
   describe '#set_path' do
-    it 'encodes the address, start_date and end_date in the URI' do
-      subject.send(:set_path, 'New York', '2020-01-01', '2020-01-02')
-      expect(subject.instance_variable_get(:@uri).path).to eq('/VisualCrossingWebServices/rest/services/timeline/New%20York/2020-01-01/2020-01-02')
+    it 'encodes the address in the URI' do
+      subject.send(:set_path, 'New York')
+      expect(subject.instance_variable_get(:@uri).path).to eq('/VisualCrossingWebServices/rest/services/timeline/New%20York')
     end
   end
 end
