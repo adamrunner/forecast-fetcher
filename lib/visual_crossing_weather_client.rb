@@ -8,9 +8,7 @@ VISUAL_CROSSING_API_URL = 'https://weather.visualcrossing.com/VisualCrossingWebS
 class VisualCrossingWeatherClient
   def initialize(api_key:)
     raise ArgumentError, 'api_key cannot be blank' if api_key.nil?
-    @uri       = URI(VISUAL_CROSSING_API_URL)
     @api_key   = api_key
-    @uri.query = URI.encode_www_form({ key: @api_key, include: 'current,days'})
   end
 
   def get_weather(address:)
@@ -20,9 +18,10 @@ class VisualCrossingWeatherClient
 
   private
   def set_path(address)
-    address = URI.encode_uri_component(address)
     # VisualCrossing API requires the address to be passed as part of the path
-    @uri.path = "#{@uri.path}/#{address}"
+    address    = URI.encode_uri_component(address)
+    @uri       = URI("#{VISUAL_CROSSING_API_URL}/#{address}")
+    @uri.query = URI.encode_www_form({ key: @api_key, include: 'current,days'})
   end
 
   def send_request
@@ -33,5 +32,9 @@ class VisualCrossingWeatherClient
 
     response = http.request(request)
     body = response.read_body
+  end
+
+  def strip_address(address)
+    address.match(/\d{5}$/)
   end
 end
