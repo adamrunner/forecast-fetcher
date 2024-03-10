@@ -1,3 +1,4 @@
 <%= render 'form' %>
+<%= render 'shared/alert' if @alert %>
 <%= render 'current_conditions' if @current_conditions %>
 <%= render 'forecast' if @days %>
