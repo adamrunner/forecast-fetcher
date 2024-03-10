@@ -56,7 +56,7 @@ Alrighty, enough talk about how I got to the end of the build and lets just run 
   2. Copy `.env.example` to `.env` and fill in your API Key
   3. Run `bundle install`
   4. Run `rails dev:cache` - without running this command Rails will NOT cache while in development mode.
-  5. `bin/dev` - this is the server process for the dev server, it also includes a Tailwind CSS server to handle updating of the CSS in dev mode.
+  5. Run `bin/dev` - this is the server process for the dev server, it also includes a Tailwind CSS server to handle updating of the CSS in dev mode.
   6. Visit [http://localhost:3000](http://localhost:3000) in your browser!
 
 ### API Key Considerations
