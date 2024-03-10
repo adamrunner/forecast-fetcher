@@ -1,4 +1,8 @@
 <%= render 'form' %>
+<% unless @address %>
+  <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Enter an address, city, state or ZIP Code to get started</p>
+<% end %>
+
 <%= render 'shared/alert' if @alert %>
 <%= render 'current_conditions' if @current_conditions %>
 <%= render 'forecast' if @days %>
