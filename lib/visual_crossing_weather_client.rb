@@ -3,8 +3,6 @@ require 'net/http'
 require 'openssl'
 require 'json'
 
-VISUAL_CROSSING_API_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline'
-
 class VisualCrossingWeatherClient
   def initialize(api_key:)
     raise ArgumentError, 'api_key cannot be blank' if api_key.nil?
@@ -21,6 +19,7 @@ class VisualCrossingWeatherClient
       send_request
     end
     # return the response and a flag indicating if the response was cached
+    # it is after the cache call to ensure that the cached flag is accurate
     { "cached" => cache_flag }.merge(data)
   end
 
@@ -38,6 +37,10 @@ class VisualCrossingWeatherClient
   end
 
   def handle_response(response)
+    # we use the API response code to determine if the request was successful
+    # we assume that 4xx is indicative of a client error, 5xx is indicative of a server error
+    # raising exceptions here allows us to handle these cases in the controller and prevents
+    # invalid responses from being cached
     if response.class.ancestors.include?(Net::HTTPSuccess)
       JSON.parse(response.body)
     elsif response.class.ancestors.include?(Net::HTTPClientError)
@@ -48,8 +51,8 @@ class VisualCrossingWeatherClient
   end
 
   def strip_address(address)
-    # naieve implementation to extract the zip code from the address
-    # a real production implementation would use a geocoding service
+    # naive implementation to extract the zip code from the address
+    # a real production implementation could use a geocoding service
     # and an address validation service to ensure the address is valid
     if zip_code = address.match(/\d{5}$/)
       zip_code[0]
