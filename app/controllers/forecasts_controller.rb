@@ -15,6 +15,7 @@ class ForecastsController < ApplicationController
       @weather            = client.get_weather(address: @address)
       @current_conditions = @weather&.dig("currentConditions")
       @days               = @weather&.dig("days")
+      @todays_forecast    = @days&.shift
       @cached             = @weather&.dig("cached")
 
       render :index

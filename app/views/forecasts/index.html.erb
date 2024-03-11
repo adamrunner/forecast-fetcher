@@ -4,5 +4,9 @@
 <% end %>
 
 <%= render 'shared/alert' if @alert %>
-<%= render 'current_conditions' if @current_conditions %>
+<div class="grid md:grid-cols-4 gap-2 justify-center">
+  <%= render 'current_conditions' if @current_conditions %>
+  <%= render 'todays_forecast' if @todays_forecast %>
+</div>
+
 <%= render 'forecast' if @days %>
