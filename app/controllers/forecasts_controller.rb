@@ -12,10 +12,10 @@ class ForecastsController < ApplicationController
     else
       client  = VisualCrossingWeatherClient.new(api_key: api_key)
 
-      weather             = client.get_weather(address: @address)
-      @current_conditions = weather&.dig("currentConditions")
-      @days               = weather&.dig("days")
-      @cached             = weather&.dig("cached")
+      @weather            = client.get_weather(address: @address)
+      @current_conditions = @weather&.dig("currentConditions")
+      @days               = @weather&.dig("days")
+      @cached             = @weather&.dig("cached")
 
       render :index
     end
