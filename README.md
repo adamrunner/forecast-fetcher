@@ -61,3 +61,13 @@ Alrighty, enough talk about how I got to the end of the build and lets just run 
 
 ### API Key Considerations
 I opted not to distribute my API key with the code in the repository as that is a best practice, however that forces anyone reviewing this application to sign up with VisualCrossing for an API Key. To mitigate any friction in the process I included a copy of my API Key in my email to notify the recruiter I was completed with the assignment. In a production environment, there should be better defined procedures for handling API keys. Some examples include: using Rails built in secret management, distributing the API keys to the environment with configuration management tooling.
+
+### Data Modeling
+This application ended up not needing much (if anything) in the way of data modeling as there is no persisted data with the current architecture. Based on the requirements I was able to craft a solution that didn't need to model and persist structured data in a database.
+
+The persistence of the cached objects is handled entirely by the Rails framework.
+
+The structure of the API response acted as a "schema", informing what data could be accessed and presented to the user.
+
+### Production Ready?
+If this was to be deployed as a production application, I would implement some sort of shared caching layer across the application servers. (e.g. Redis) The current cache implementation is limited to the memory of the application server it runs on. The code changes required to accomodate this would only be in changing the cache store that Rails uses, no application code would need to change.
